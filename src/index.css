@@ -268,11 +268,11 @@ html, body {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(201,169,110,0.1);
   z-index: 999;
-  padding: 1rem 0;
+  padding: 1rem 0 1.5rem;
   flex-direction: column;
 }
 .mobile-menu.open { display: flex; }
-.mobile-menu a, .mobile-menu button {
+.mobile-menu a, .mobile-menu > button {
   font-family: 'Jost', sans-serif;
   font-size: 13px;
   font-weight: 300;
@@ -282,13 +282,102 @@ html, body {
   text-decoration: none;
   background: none;
   border: none;
+  border-bottom: 1px solid rgba(201,169,110,0.06);
   cursor: pointer;
   padding: 14px 2rem;
   text-align: left;
-  border-bottom: 1px solid rgba(201,169,110,0.06);
   transition: color 0.2s, padding-left 0.2s;
+  width: 100%;
 }
-.mobile-menu a:hover, .mobile-menu button:hover { color: var(--gold); padding-left: 2.5rem; }
+.mobile-menu a:hover, .mobile-menu > button:hover { color: var(--gold); padding-left: 2.5rem; }
+
+/* Mobile menu — auth section divider */
+.mobile-menu-divider {
+  height: 1px;
+  background: rgba(201,169,110,0.12);
+  margin: 0.5rem 2rem;
+}
+
+/* Mobile menu — signed-in user row */
+.mobile-menu-auth {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2rem;
+  gap: 12px;
+}
+.mobile-menu-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mobile-menu-user-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  object-fit: cover;
+}
+.mobile-menu-user-initial {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #1a1208;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.mobile-menu-username {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  color: var(--gold-light);
+  letter-spacing: 0.05em;
+}
+.mobile-menu-signout {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.6) !important;
+  background: rgba(201,169,110,0.08) !important;
+  border: 1px solid rgba(201,169,110,0.25) !important;
+  border-radius: 20px !important;
+  padding: 7px 16px !important;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: auto !important;
+}
+.mobile-menu-signout:hover { background: rgba(201,169,110,0.18) !important; color: var(--gold) !important; padding-left: 16px !important; }
+
+/* Mobile menu — sign-in button */
+.mobile-menu-signin {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+  text-align: center !important;
+  margin: 0.5rem 2rem 0 !important;
+  padding: 12px 20px !important;
+  letter-spacing: 0.12em !important;
+  color: var(--gold) !important;
+  background: rgba(201,169,110,0.06) !important;
+  border: 1px solid rgba(201,169,110,0.3) !important;
+  border-radius: 12px !important;
+  font-size: 13px !important;
+  width: auto !important;
+  border-bottom: 1px solid rgba(201,169,110,0.3) !important;
+  transition: all 0.2s !important;
+}
+.mobile-menu-signin:hover {
+  background: rgba(201,169,110,0.14) !important;
+  border-color: var(--gold) !important;
+  padding-left: 20px !important;
+}
 
 /* ═══════════════════════════════════════
    PAGE CONTAINERS
@@ -1340,7 +1429,22 @@ html, body {
   .suggestions { padding: 0.5rem 1rem; }
   .bubble { max-width: 90%; }
   .site-footer { font-size: 10px; padding: 0.5rem 1rem; gap: 5px; }
+
+  /* Chat header — compact on mobile so user profile doesn't overflow */
+  .chat-header { padding: 0.8rem 1rem 0.7rem; gap: 8px; }
+  .chat-header-info h2 { font-size: 0.95rem; }
+  .chat-header-info p { display: none; } /* hide subtitle on tiny screens */
+  .chat-header-actions { gap: 4px; }
+  .icon-btn { width: 30px; height: 30px; font-size: 14px; }
+
+  /* Lock overlay — tighter padding on small screens */
+  .chat-lock-overlay { padding: 1rem; }
+  .chat-lock-content { padding: 1.4rem 1.2rem; }
+  .chat-lock-content h3 { font-size: 1.1rem; }
+  .chat-lock-content p { font-size: 0.78rem; margin-bottom: 1rem; }
+  .google-auth-btn { padding: 10px 18px !important; font-size: 12px; }
 }
+
 
 @media (max-width: 1024px) and (min-width: 769px) {
   :root { --panel-w: 42%; }

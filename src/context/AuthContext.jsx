@@ -1,7 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { auth, db, googleProvider } from '../lib/firebase';
 import { 
-  signInWithPopup, 
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut, 
   onAuthStateChanged 
 } from 'firebase/auth';
@@ -10,6 +12,11 @@ import {
   collection, 
   writeBatch 
 } from 'firebase/firestore';
+
+/** Returns true on iOS/Android mobile browsers where popups are unreliable */
+function isMobileBrowser() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
 
 const AuthContext = createContext(null);
 
@@ -80,6 +87,17 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
+    // Handle redirect result from signInWithRedirect (mobile auth flow)
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (result?.user) {
+          await syncGuestData(result.user.uid);
+        }
+      })
+      .catch((err) => {
+        console.error('Redirect sign-in error:', err);
+      });
+
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
       setLoading(false);
@@ -93,9 +111,20 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = async () => {
     try {
+      if (isMobileBrowser()) {
+        // Mobile browsers block popups — use redirect flow instead
+        await signInWithRedirect(auth, googleProvider);
+        // Page will navigate away; result is handled in getRedirectResult above
+        return;
+      }
       const result = await signInWithPopup(auth, googleProvider);
       return result.user;
     } catch (err) {
+      // Popup blocked fallback: fall back to redirect
+      if (err.code === 'auth/popup-blocked' || err.code === 'auth/popup-closed-by-user') {
+        await signInWithRedirect(auth, googleProvider);
+        return;
+      }
       console.error('Google Sign-In Error:', err);
       throw err;
     }
