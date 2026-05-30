@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dhamma-path.vercel.app/sitemap.xml

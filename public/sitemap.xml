@@ -1,34 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Primary Landing & Interactive Chat Sanctuary -->
   <url>
-    <loc>https://dhammapada-c4adb.firebaseapp.com/</loc>
-    <lastmod>2026-05-30</lastmod>
+    <loc>https://dhamma-path.vercel.app/</loc>
     <changefreq>daily</changefreq>
-    <priority>1.00</priority>
-  </url>
-  
-  <!-- Guided Meditation Timer, Streaks Tracker & Scheduler -->
-  <url>
-    <loc>https://dhammapada-c4adb.firebaseapp.com/#meditate</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-
-  <!-- Canonical Teachings of Gautama Buddha (Pali Canon Suttas) -->
-  <url>
-    <loc>https://dhammapada-c4adb.firebaseapp.com/#teachings</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- About Dhamma Path, Developer Credits & Project History -->
-  <url>
-    <loc>https://dhammapada-c4adb.firebaseapp.com/#about</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
+    <priority>1.0</priority>
   </url>
 </urlset>
